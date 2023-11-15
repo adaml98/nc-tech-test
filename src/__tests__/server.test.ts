@@ -8,11 +8,11 @@ describe('GET /cards', () => {
   });
     test('should return an array', async () => {
     const response = await request(app).get('/cards');
-    expect(Array.isArray(response.body.cards)).toBe(true);
+    expect(Array.isArray(response.body)).toBe(true);
   });
   test('should return array of cards with title, imageUrl and card_id', async () => {
   const response = await request(app).get('/cards')
-  expect(response.body.cards).toEqual([{
+  expect(response.body).toEqual([{
     "title": "card 1 title",
     "imageUrl": "/front-cover-portrait-1.jpg",
     "card_id": "card001"
