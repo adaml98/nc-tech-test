@@ -1,3 +1,7 @@
+import { fetchCards } from "../models/cards.models";
+
 export const getCards = (req, res) => {
-        res.status(200).send('status 200');
+    fetchCards().then((cards) => {
+        res.status(200).send({cards})
+    });
 };

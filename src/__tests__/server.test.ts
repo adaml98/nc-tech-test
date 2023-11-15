@@ -6,6 +6,10 @@ describe('GET /cards', () => {
     const response = await request(app).get('/cards');
     expect(response.status).toBe(200);
   });
+    test('should return an array', async () => {
+    const response = await request(app).get('/cards');
+    expect(Array.isArray(response.body.cards)).toBe(true);
+  });
 });
 
 
