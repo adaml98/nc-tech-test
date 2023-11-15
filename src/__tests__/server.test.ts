@@ -51,4 +51,19 @@ describe('GET /cards/:cardId', () => {
       pages: expect.any(Array)
     }))
   })
+  test('should return formated available sizes', async () => {
+    const response = await request(app).get('/cards/card001')
+    expect(response.body.availableSizes).toEqual([{
+      "id": "sm",
+      "title": "Small"
+    },
+    {
+      "id": "md",
+      "title": "Medium"
+    },
+    {
+      "id": "gt",
+      "title": "Giant"
+    }])
+  });
 });
