@@ -31,12 +31,24 @@ describe('GET /cards', () => {
 });
 
 
-
-test.skip('returns matching card title', async () => {
-  const response = await request(app).get('/cards/card001')
-
-  expect(response.status).toBe(200)
-  expect(response.body).toEqual(expect.objectContaining({
-    title: 'card 1 title',
-  }))
-})
+describe('GET /cards/:cardId', () => {
+  test('should return status code 200', async () => {
+    const response = await request(app).get('/cards/card001');
+    expect(response.status).toBe(200);
+  });
+  test('should return an object', async () => {
+    const response = await request(app).get('/cards/card001');
+      expect(typeof response.body).toBe('object');
+  });
+  test('should return matching card', async () => {
+    const response = await request(app).get('/cards/card001')
+    expect(response.body).toEqual(expect.objectContaining({
+      title: expect.any(String),
+      imageUrl: expect.any(String),
+      card_id: expect.any(String),
+      base_price: expect.any(Number),
+      availableSizes: expect.any(Array),
+      pages: expect.any(Array)
+    }))
+  })
+});
