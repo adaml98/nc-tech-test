@@ -10,6 +10,24 @@ describe('GET /cards', () => {
     const response = await request(app).get('/cards');
     expect(Array.isArray(response.body.cards)).toBe(true);
   });
+  test('should return array of cards with title, imageUrl and card_id', async () => {
+  const response = await request(app).get('/cards')
+  expect(response.body.cards).toEqual([{
+    "title": "card 1 title",
+    "imageUrl": "/front-cover-portrait-1.jpg",
+    "card_id": "card001"
+  },
+  {
+    "title": "card 2 title",
+    "imageUrl": "/front-cover-portrait-2.jpg",
+    "card_id": "card002"
+  },
+  {
+    "title": "card 3 title",
+    "imageUrl": "/front-cover-landscape.jpg",
+    "card_id": "card003"
+  }]);
+})
 });
 
 
