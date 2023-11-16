@@ -41,12 +41,12 @@ describe('GET /cards/:cardId', () => {
       expect(typeof response.body).toBe('object');
   });
   test('should return matching card', async () => {
-    const response = await request(app).get('/cards/card001')
+    const response = await request(app).get('/cards/card003')
     expect(response.body).toEqual(expect.objectContaining({
-      title: expect.any(String),
-      imageUrl: expect.any(String),
-      card_id: expect.any(String),
-      base_price: expect.any(Number),
+      title: 'card 3 title',
+      imageUrl: '/front-cover-landscape.jpg',
+      card_id: 'card003',
+      base_price: 200,
       availableSizes: expect.any(Array),
       pages: expect.any(Array)
     }))
@@ -65,5 +65,26 @@ describe('GET /cards/:cardId', () => {
       "id": "gt",
       "title": "Giant"
     }])
+  });
+  test('should return pages', async () => {
+    const response = await request(app).get('/cards/card001')
+    expect(response.body.pages).toEqual([
+      {
+        "title": "Front Cover",
+        "templateId": "template001"
+      },
+      {
+        "title": "Inside Left",
+        "templateId": "template002"
+      },
+      {
+        "title": "Inside Right",
+        "templateId": "template003"
+      },
+      {
+        "title": "Back Cover",
+        "templateId": "template004"
+      }
+    ])
   });
 });
