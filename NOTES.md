@@ -20,4 +20,4 @@
 ## General considerations if I had more time
 
 1. Could write tests for cardFunctions
-2.
+2. I would go back through all my code and refactor where I can. I generally default to using for loops but im sure i could have cleaned up some of my functions using maps or Array.find on the fetchCardById function.
