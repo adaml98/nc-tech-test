@@ -98,3 +98,47 @@ describe('GET /cards/:cardId', () => {
   });
 });
 
+describe('POST /cards', () => {
+  test('should receive a response of 201 and return the posted card', async () => {
+    const input = {
+      "title": "card 4 title",
+      "sizes": [
+        "sm",
+        "md",
+        "gt"
+      ],
+      "basePrice": 300,
+      "pages": [
+        {
+          "title": "Front Cover",
+          "templateId": "template001"
+        },
+        {
+          "title": "Inside Left",
+          "templateId": "template002"
+        },
+        {
+          "title": "Inside Right",
+          "templateId": "template003"
+        },
+        {
+          "title": "Back Cover",
+          "templateId": "template004"
+        }
+      ]
+    };
+
+    const response = await request(app).post("/cards").send(input);
+    expect(response.status).toBe(201);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        title: input.title,
+        base_price: input.basePrice,
+        card_id: expect.stringMatching(/^card\d{3}$/),
+        availableSizes: expect.any(Array),
+        pages: expect.any(Array),
+        imageUrl: expect.any(String),
+      })
+    );
+  });
+});
