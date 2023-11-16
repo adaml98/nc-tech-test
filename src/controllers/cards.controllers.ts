@@ -19,12 +19,12 @@ export const getCardById = async (req, res) => {
     }
 }
 
-export const postCard = async(req, res) => {
-    try{
+export const postCard = async (req, res) => {
+    try {
         const newCard = req.body;
         const card = await submitCard(newCard);
         res.status(201).send(card);
-    }catch (error){
+    } catch (error){
         res.status(error.status).send({ error: error.message });
     }
 }
