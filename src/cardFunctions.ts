@@ -28,3 +28,17 @@ export const getUrl = async (templateId) => {
 export const isValidCardId = (cardId) => {
     return /^card\d{3}$/.test(cardId);
 }
+
+export const formatCard = async (card) => {
+    const templateId = card.pages[0].templateId;
+    const imageUrl = await getUrl(templateId);
+
+    return {
+        "title": card.title,
+        imageUrl,
+        "card_id": card.id,
+        "base_price": card.basePrice,
+        "availableSizes": formatSizes(card.sizes),
+        "pages": card.pages,
+    };
+};
