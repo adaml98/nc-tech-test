@@ -30,7 +30,6 @@ describe('GET /cards', () => {
 })
 });
 
-
 describe('GET /cards/:cardId', () => {
   test('should return status code 200', async () => {
     const response = await request(app).get('/cards/card001');
@@ -87,4 +86,15 @@ describe('GET /cards/:cardId', () => {
       }
     ])
   });
+  test("should return a 400 status if cardId is not in a valid format", async () => {
+    const response = await request(app).get("/cards/notAnId");
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBe("Invalid cardId format");
+  });
+  test("should return a 404 status if id does not exist", async () => {
+    const response = await request(app).get("/cards/card015");
+    expect(response.status).toBe(404);
+    expect(response.body.error).toBe("Card not found");
+  });
 });
+

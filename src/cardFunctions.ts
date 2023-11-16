@@ -24,3 +24,7 @@ export const getUrl = async (templateId) => {
     const imageUrl = matchingTemplate.imageUrl;
     return imageUrl;
 }
+
+export const isValidCardId = (cardId) => {
+    return /^card\d{3}$/.test(cardId);
+}
